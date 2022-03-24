@@ -1,18 +1,29 @@
 const hre = require("hardhat");
 
-async function main() {
+const main = async () => {
+  const PatientContractFactory = await hre.ethers.getContractFactory("Patient");
+  const PatientContract = await PatientContractFactory.deploy();
+  await PatientContract.deployed();
 
-  const PatientContract = await hre.ethers.getContractFactory("Patient");
-  const patient = await PatientContract.deploy();
+  console.log("Contract deployed to:", PatientContract.address);
 
-  await patient.deployed();
+ 
 
-  console.log("Patient deployed to:", patient.address);
-}
+  let patientTxn = await PatientContract.store_patient_details(1, "Vivek", 22, 'Male', "5ft", 58, "Mahendranager", 9845466194, "tekjoshui@gmail.com", 32);
+  await patientTxn.wait();
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
+  console.log( await PatientContract.retreive_patient_details(1));
+
+};
+
+const runMain = async () => {
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.log(error);
     process.exit(1);
-  });
+  }
+};
+
+runMain();
