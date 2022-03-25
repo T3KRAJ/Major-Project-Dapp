@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import abi from "../utils/Patient.json";
 import { ethers } from "ethers";
+import RegisterPatientForm from './RegisterPatientForm';
 
 const Home = () => {
 	const contractAddress = "0x3493d33058499Ed9250bB3b4E8C7053269d21487";
@@ -88,6 +89,7 @@ const Home = () => {
 
 	return (
 		<>
+		<RegisterPatientForm />
 			<form onSubmit={handleSetPatient} style={{ padding: '40px 0' }}>
 				<h2>Register Patient</h2>
 				<h4>Patient ID</h4>
