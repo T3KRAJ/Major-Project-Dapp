@@ -1,127 +1,174 @@
-import React from 'react'
+import React, { useState } from 'react'
+import abi from "../utils/Patient.json";
+import { ethers } from "ethers";
 import "./RegisterPatientForm.css"
 
 const RegisterPatientForm = () => {
-  return (
-    <div><div>RegisterPatientForm</div>
-        <div id="bg">
-       <center> </center>
-      <br>
-      
-       
-        <b><u> <h1 >PATIENT REGISTRATION FORM</h1></u> </b> 
-        <div id="form">
-            <form method="get" action="submit.html">
-                <table id="table">
-                    <tr>
-                        <td>PATIENT NAME:</td>
-                        <td>
-                            <input type="text" name="username" size="30"
-                            maxlength="30" placeholder=" Your Name" />
-                            (max 30 characters A-Z and a-z)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>PATIENT ID. :
-                            </td>
-                        <td><input type="text" name="username" size="30"
-                            maxlength="30" placeholder="Patient ID" /> 
-                             (max 30 characters A-Z and a-z)
-                            </td>
-                    </tr>
-                    
+	const contractAddress = "0x3493d33058499Ed9250bB3b4E8C7053269d21487";
+	const contractABI = abi.abi
 
-                    <tr>
-                        <td>EMAIL ID:
-                            </td>
-                        <td><input id="email" type="email" name="email" size="30" maxlength="100" placeholder="EMAIL" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            MOBILE NO:
-                            
-                        </td>
-                        <td><input type="tel" name="number" size="30" maxlength="12" placeholder="Enter Mobile no"/>
-                            
-                            (10 digits number)
-                        </td>
-                            
-                    </tr>
-                    <tr>
-                        <td>GENDER:</td>
-                        <td><input id="female" type="radio" name="gender"
-                            value="f">
-                            <label for="female">Female</label>
-                            <input id="male" type="radio" name="gender"
-                            value="m">
-                            <label for="male">Male</label>
-                            </td>
-                    </tr>
-                  
-                  
-                    <tr><td>ADDRESS:</td>
-                    <td><textarea rows="4" cols="40" id="comments">
-                    </textarea>
-                    </td></tr>
-                    <tr>
-                        <td>CITY:</td>
-                        <td>
-                            <input type="text" name="city" size="30"
-                            maxlength="30" placeholder="Enter your city name" /></td>
-                            
-                           
-                    </tr>
-                    <tr>
-                    
-                    <td>PIN CODE:</td>
-                        <td>
-                            <input type="text" name="pin" size="30"
-                            maxlength="30" placeholder="Enter pin code" />
-                            (6 digits number)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>STATE:</td>
-                        <td>
-                            <input type="text" name="state" size="30"
-                            maxlength="30" placeholder="Enter your state name" /></td>
-                            
-                           
-                    </tr>
-                    <tr>
-                        <td>COUNTRY:</td>
-                        <td>
-                            <input type="text" name="COUNTRY" size="30"
-                            maxlength="30" placeholder="Enter your city name" /></td>
-                            
-                           
-                    </tr>
-                    
-                
-                    
+	const [patientDetail, setPatientDetail] = useState({
+		id: '',
+		name: '',
+		age: '',
+		gender: '',
+		weight: '',
+		height: '',
+		address: '',
+		phone: '',
+		email: '',
+	})
+	const [patientId, setPatientId] = useState(0)
+	const [patientInfo, setPatientInfo] = useState('')
+
+	const handleInputChange = e => {
+		const { name, value } = e.target;
+		setPatientDetail(prevState => ({
+			...prevState,
+			[name]: value
+		}));
+	};
+
+	const handleSetPatient = (e) => {
+		e.preventDefault()
+		createPatientRecord()
+	}
+
+	const handleGetPatient = (e) => {
+		e.preventDefault()
+		retrievePatientDetails()
+	}
+
+	const createPatientRecord = async () => {
+		try {
+			const { ethereum } = window;
+
+			if (ethereum) {
+				const provider = new ethers.providers.Web3Provider(ethereum);
+				const signer = provider.getSigner();
+				const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+				var current = new Date();
+				const patientRecord = await wavePortalContract.store_patient_details(
+					parseInt(patientDetail.id),
+					patientDetail.name,
+					parseInt(patientDetail.age),
+					patientDetail.gender,
+					patientDetail.height,
+					parseInt(patientDetail.weight),
+					patientDetail.address,
+					parseInt(patientDetail.phone),
+					patientDetail.email,
+					Date.parse(current),
+					{ gasLimit: 3000000 })
+			} else {
+				console.log("Ethereum object doesn't exist!");
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const retrievePatientDetails = async () => {
+		try {
+			const { ethereum } = window;
+
+			if (ethereum) {
+				const provider = new ethers.providers.Web3Provider(ethereum);
+				const signer = provider.getSigner();
+				const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+				const patientDetail = await wavePortalContract.retreive_patient_details(patientId)
+				setPatientInfo(patientDetail)
+				console.log(patientInfo)
+			} else {
+				console.log("Ethereum object doesn't exist!");
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	return (
+		<>
+    <div>
+      <div id="bg">
+        <b><h1 >PATIENT REGISTRATION FORM</h1></b>
+        <div id="form" onSubmit={handleSetPatient}>
+          <form>
+            <table id="table">
+              <tbody>
                 <tr>
-                    <td>
-                        <button type="submit">Submit</button>
-                        <button type="reset">Reset</button>
-                </td>
+                  <td>PATIENT ID :
+                  </td>
+                  <td><input onChange={handleInputChange} type="number" name="id" value={patientDetail.id}
+                    placeholder="Enter the patient ID" />
+                  </td>
                 </tr>
-
-                    
-                
-                    
-
-
-                    
-                </table>
-            </form>
-
-
+                <tr>
+                  <td>PATIENT NAME:</td>
+                  <td>
+                    <input onChange={handleInputChange} type="text" name="name" value={patientDetail.name}
+                      placeholder="Enter the patient Name" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>EMAIL ID:
+                  </td>
+                  <td><input onChange={handleInputChange} id="email" type="email" name="email" value={patientDetail.email} maxLength="100" placeholder="Enter the email address" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    MOBILE NO:
+                  </td>
+                  <td><input onChange={handleInputChange} type="tel" name="phone" value={patientDetail.phone} maxLength="12" placeholder="Enter the Mobile no" />
+                  </td>
+                </tr>
+				<tr>
+                  <td>
+                    Age:
+                  </td>
+                  <td><input onChange={handleInputChange} type="number" name="age" value={patientDetail.age} maxLength="3" placeholder="Enter the age of patient" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Height:
+                  </td>
+                  <td><input onChange={handleInputChange} type="text" name="height" value={patientDetail.height} maxLength="12" placeholder="Enter the height (in fts)" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Weight:
+                  </td>
+                  <td><input onChange={handleInputChange} type="number" name="weight" value={patientDetail.weight} maxLength="12" placeholder="Enter the weight (in kgs)" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>GENDER:</td>
+                  <td>
+                    <select id="gender" name="gender" value={patientDetail.gender} onChange={handleInputChange}>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr><td>ADDRESS:</td>
+				<td><input onChange={handleInputChange} type="text" name="address" value={patientDetail.address} maxLength="100" placeholder="Enter the address" />
+</td></tr>
+                <tr>
+                  <td>
+                    <button type="submit" className='submitButton'>Submit</button>
+                    {/* <button type="reset" className='resetButton'>Reset</button> */}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
- 
-     </div>
+      </div>
     </div>
-  )
+		</>
+	)
 }
-
 export default RegisterPatientForm

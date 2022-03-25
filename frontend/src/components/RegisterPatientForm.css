@@ -1,26 +1,23 @@
 #bg {
-    background-color:grey;
-    border:2px solid black;
+    background-color:rgb(238, 229, 229);
   
     padding: 40px;
     position: absolute;
     margin-left: 340px;
     margin-top: 10px;
-    height: 1200px;
+    height: 1100px;
     width: 780px;
     line-height:0px;
   }
   
   h1 {
-    color: blue;
+    color: #000;
     text-align: center;
     padding: 0px;
     font-size: 30px;
   }
   #form {
     background-color: white;
-    border: 2px solid black;
-  
     padding: 40px;
     position: absolute;
     margin-left: auto;
@@ -31,7 +28,6 @@
     line-height:0px;
   }
   #table{
-  
       height: 950px;
       width: 700px;
       text-align: justify;
@@ -39,80 +35,37 @@
       font-weight: bold;
       font-style: normal;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      
-     
-  }
-  th{
-    text-align: center;
-  }
-  td{
-padding: 2px;
-    justify-content: left;
-
-      
-  }
-  
-  tr{
-  
-    
-  padding: 30px;
-    width: 200px;
-    border-collapse: separate;
-
-
-    text-align: left;
-  
-  }
-  #submit_p1{
-    text-align: center;
-    font-weight: bolder;
-    font-size: xx-large;
-    color:lawngreen;
-
-
   }
 
-  #submit_p2{
-    text-align: center;
-    font-size: xx-large;
-    font-weight: bold;
-    color: purple;
-  }
-
-  a{
-    text-align: center;
-    font-size: xx-large;
-    font-weight: bold;
-    color: slateblue;
-
-  }
   input,select {
-
-    color: #5a5854;
-    background-color: #f2f2f2;
-    padding: 4px 4px 4px 2px;
-    border-radius: 10px;
-    
-  
-    margin-bottom: 1px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
     input:focus {
     background-color: #ffffff;
-    border: 2px solid #b1e1e4;
+    border: 1px solid #b1e1e4;
     border-spacing: 2px 2px 2px 2px;
     
   }
-    input#email {
-    background-image:url("images/user-logo.png");
-  
-  background-repeat: no-repeat;
-background-position: 1px;
-background-size: 35px 35px;
-padding: 4px;
-
-
-margin-bottom: 10px;
-    }
-    input#twitter {
-    background-image: url("");
+  .submitButton{
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   }
+  .resetButton{
+    background-color: #b5c2b5;
+    color: white;
+    padding: 14px 24px;
+    margin: 0 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
