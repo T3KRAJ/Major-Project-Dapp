@@ -90,49 +90,7 @@ const Home = () => {
 	return (
 		<>
 		<RegisterPatientForm />
-			<form onSubmit={handleSetPatient} style={{ padding: '40px 0' }}>
-				<h2>Register Patient</h2>
-				<h4>Patient ID</h4>
-				<input name="id" type="number" value={patientDetail.id} onChange={handleInputChange} />
-				<h4>Patient Name</h4>
-				<input name="name" type="text" value={patientDetail.name} onChange={handleInputChange} />
-				<h4>Patient Age</h4>
-				<input name="age" type="number" value={patientDetail.age} onChange={handleInputChange} />
-				<h4>Patient Gender</h4>
-				<input name="gender" type="text" value={patientDetail.gender} onChange={handleInputChange} />
-				<h4>Patient Height</h4>
-				<input name="height" type="text" value={patientDetail.height} onChange={handleInputChange} />
-				<h4>Patient Weight</h4>
-				<input name="weight" type="number" value={patientDetail.weight} onChange={handleInputChange} />
-				<h4>Patient Address</h4>
-				<input name="address" type="text" value={patientDetail.address} onChange={handleInputChange} />
-				<h4>Patient Phone</h4>
-				<input name="phone" type="number" value={patientDetail.phone} onChange={handleInputChange} />
-				<h4>Patient Email</h4>
-				<input name="email" type="email" value={patientDetail.email} onChange={handleInputChange} />
-				
-				<h4>Patient DAte</h4>
-				<input name="date" type="number" value={patientDetail.date} onChange={handleInputChange} />
-				<br />
-				<br />
-				<br />
-
-				<button type="submit">Register</button>
-			</form>
-			<form onSubmit={handleGetPatient}>
-				<input name="patientId" type="number" value={patientId} onChange={(e) => setPatientId(e.target.value)} />
-				<button type="submit">Submit</button>
-			</form>
-			{
-				patientInfo &&
-				<>
-				{/* <p>ID: </p><span>{patientInfo[0]}</span>
-				<p>NAme: </p><span>{patientInfo[1]}</span>
-				<p>Age: </p><span>{patientInfo[2]}</span>
-				<p>Gender: </p><span>{patientInfo[3]}</span>
-				<p>Height: </p><span>{patientInfo[4]}</span> */}
-				</>
-			}
+			
 		</>
 	)
 }
