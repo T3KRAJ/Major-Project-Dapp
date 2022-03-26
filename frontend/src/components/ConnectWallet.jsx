@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./ConnectWallet.css"
 const ConnectWallet = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
@@ -54,12 +54,12 @@ const ConnectWallet = () => {
   }, [])
 
   return (
-    <div className="mainContainer">
+    <div className="mainContainer" style={{textAlign: 'center'}}>
       <div className="dataContainer">
 
         {currentAccount ?
-        <p>User <strong>{currentAccount}</strong> is Connected!  </p> : (
-          <button className="waveButton" onClick={connectWallet}>
+        <p className="user_id">User <strong>{currentAccount}</strong> is Connected!  </p> : (
+          <button class="button-32" role="button" onClick={connectWallet}>
             Connect Wallet
           </button>
         )}

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import abi from "../utils/Patient.json";
 import { ethers } from "ethers";
 import "./RegisterPatientForm.css"
+import {
+  Link
+} from "react-router-dom";
 
 const RegisterPatientForm = () => {
 	const contractAddress = "0x3493d33058499Ed9250bB3b4E8C7053269d21487";
@@ -18,8 +21,6 @@ const RegisterPatientForm = () => {
 		phone: '',
 		email: '',
 	})
-	const [patientId, setPatientId] = useState(0)
-	const [patientInfo, setPatientInfo] = useState('')
 
 	const handleInputChange = e => {
 		const { name, value } = e.target;
@@ -34,10 +35,6 @@ const RegisterPatientForm = () => {
 		createPatientRecord()
 	}
 
-	const handleGetPatient = (e) => {
-		e.preventDefault()
-		retrievePatientDetails()
-	}
 
 	const createPatientRecord = async () => {
 		try {
@@ -60,25 +57,6 @@ const RegisterPatientForm = () => {
 					patientDetail.email,
 					Date.parse(current),
 					{ gasLimit: 3000000 })
-			} else {
-				console.log("Ethereum object doesn't exist!");
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	const retrievePatientDetails = async () => {
-		try {
-			const { ethereum } = window;
-
-			if (ethereum) {
-				const provider = new ethers.providers.Web3Provider(ethereum);
-				const signer = provider.getSigner();
-				const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
-				const patientDetail = await wavePortalContract.retreive_patient_details(patientId)
-				setPatientInfo(patientDetail)
-				console.log(patientInfo)
 			} else {
 				console.log("Ethereum object doesn't exist!");
 			}
@@ -159,11 +137,12 @@ const RegisterPatientForm = () => {
                 <tr>
                   <td>
                     <button type="submit" className='submitButton'>Submit</button>
-                    {/* <button type="reset" className='resetButton'>Reset</button> */}
                   </td>
                 </tr>
               </tbody>
             </table>
+       <Link to="/patient">View Patient Detail</Link>
+
           </form>
         </div>
       </div>
