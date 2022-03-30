@@ -9,14 +9,14 @@ import MainPage from "./components/MainPage";
 
 function App() {
   return (
-    <MainPage />
-    // <BrowserRouter>
-    //   <ConnectWallet />
-    //   <Routes>
-    //     <Route path="/" element={<RegisterPatientForm />} />
-    //     <Route path="/patient" element={<RetrievePatientDetail />} />
-    //   </Routes>
-    // </BrowserRouter>
+    <BrowserRouter>
+      <ConnectWallet />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/register-patient" element={<RegisterPatientForm />} />
+        <Route path="/get-patient" element={<RetrievePatientDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

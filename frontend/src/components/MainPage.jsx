@@ -17,11 +17,11 @@ const MainPage = () => {
         <p className="Card_p">Doctor Reg.</p>
       </Card>
       <br />
-      {/* <Link to="woaop"> */}
+      <Link to="/register-patient">
       <Card className="mainpageCard">
         <p className="Card_p">Patient Reg.</p>
       </Card>
-      {/* </Link> */}
+      </Link>
       <br />
       <Card className="mainpageCard">
         <p className="Card_p">Medical Record</p>
