@@ -1,0 +1,26 @@
+.Card {
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-color: white;
+    /* max-width: 100%; */
+    /* width: 100%; */
+    text-align: center;
+}
+
+.Card p {
+    font-size: large;
+    font-weight: 700;
+    font-size: large;
+}
+
+.Card:hover {
+    cursor: pointer;
+    background-color: black;
+}
+
+.Card:hover p {
+    color: aqua;
+    font-size: x-large;
+    font-weight: 900;
+}
