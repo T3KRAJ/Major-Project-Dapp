@@ -18,7 +18,8 @@ contract ProductDetection {
     struct Manufacturer {
         bool exists;
         string name;
-        address _address;
+        string website;
+        address wallet_address;
     }
 
     struct Product {
@@ -26,6 +27,7 @@ contract ProductDetection {
         uint256 id;
         string name;
         string model;
+        uint256 price;
         address manufacturer;
         address curOwner;
         address[] owners;
@@ -42,7 +44,11 @@ contract ProductDetection {
         owner = msg.sender;
     }
 
-    function createManufacturer(string memory _name, address _address) public {
+    function createManufacturer(
+        string memory _name,
+        string memory _website,
+        address _address
+    ) public {
         require(
             msg.sender == owner,
             "Only owner is authorised to create a manufacturer!"
@@ -51,32 +57,33 @@ contract ProductDetection {
         Manufacturer storage m = manufacturers[_address];
         m.exists = true;
         m.name = _name;
-        m._address = _address;
+        m.wallet_address = _address;
+        m.website = _website;
         emit ManufacturerCreated(_name, _address);
     }
 
     function createProduct(
         string memory _name,
         string memory _model,
-        address _man_address
+        uint256 _price
     ) public {
         require(
-            manufacturers[_man_address].exists == true,
+            manufacturers[msg.sender].exists == true,
             "You are not a Manufacturer!"
         );
-
         Product storage p = products[productId];
         p.exists = true;
         p.id = productId;
         p.name = _name;
         p.model = _model;
-        p.manufacturer = _man_address;
-        p.curOwner = _man_address;
+        p.price = _price;
+        p.manufacturer = msg.sender;
+        p.curOwner = msg.sender;
         // push cur owner(manufacturer) to owners array
-        p.owners.push(_man_address);
+        p.owners.push(msg.sender);
 
         productId++;
-        emit ProductCreated(productId - 1, _man_address);
+        emit ProductCreated(productId - 1, msg.sender);
     }
 
     function getManufacture(address _address)
@@ -94,7 +101,6 @@ contract ProductDetection {
     function updateOwnership(uint256 _id, address _newOwner) public {
         Product storage p = products[_id];
         require(p.curOwner == msg.sender, "Not authorized");
-
         p.curOwner = _newOwner;
         p.owners.push(_newOwner);
 

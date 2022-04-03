@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ConnectWallet from "./ConnectWallet";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,13 +55,7 @@ const Navbar = () => {
                     </ul>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
-                            <Link to="/manufacturer"
-                                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
-                                aria-label="Connect Wallet"
-                                title="Connect Wallet"
-                            >
-                                Connect Wallet
-                            </Link>
+                            <ConnectWallet />
                         </li>
                     </ul>
                     <div class="lg:hidden">
@@ -153,13 +148,7 @@ const Navbar = () => {
                                             </li>
 
                                             <li>
-                                                <Link to="/manufacturer"
-                                                    class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
-                                                    aria-label="Connect Wallet"
-                                                    title="Connect Wallet"
-                                                >
-                                                    Connect Wallet
-                                                </Link>
+                                                <ConnectWallet />
                                             </li>
                                         </ul>
                                     </nav>

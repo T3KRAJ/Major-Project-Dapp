@@ -28,4 +28,5 @@ module.exports = {
   },
 };
 
-// 0x0d3ed61140bace852a04e87f512eb6dc46ec30fd;
+// npx hardhat run scripts/deploy.js --network rinkeby
+// 0xB06f44329c3B2f92B1C9C78440Ca76063d575208;
