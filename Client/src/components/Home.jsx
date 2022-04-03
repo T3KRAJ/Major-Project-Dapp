@@ -78,7 +78,7 @@ const Home = () => {
                       mt-6
                       font-semibold
                       text-blue-500
-                    " title="read more"><svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    " title="scroll"><svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path fill="none" d="M0 0h24v24H0z"></path>
                                                 <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
                                             </svg>
