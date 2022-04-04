@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import abi from "../utils/ProductDetection.json";
 import { ethers } from "ethers";
+import Loader from './Loader';
 
 const AddManufacturer = () => {
     const contractAddress = "0xB06f44329c3B2f92B1C9C78440Ca76063d575208";
     const contractABI = abi.abi
+    const [isLoading, setIsLoading] = useState(false)
 
     const [manufacturer, setManufacturer] = useState({
         man_name: '',
@@ -39,17 +41,21 @@ const AddManufacturer = () => {
                 )
                 console.log(man_name)
                 console.log(man_address)
+                setIsLoading(false)
                 setManufacturer({ man_name: '', website: '', wallet_address: '' })
             } else {
+                setIsLoading(false)
                 console.log("Ethereum object doesn't exist!");
             }
         } catch (error) {
             console.log(error);
+            setIsLoading(false)
         }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setIsLoading(true)
         createManufacturer()
     }
 
@@ -107,7 +113,10 @@ const AddManufacturer = () => {
                         </div>
                         <div>
                         </div>
+                        {isLoading && <div className='mx-auto py-6 flex justify-center'><Loader /></div>}
+
                     </form>
+
                 </div>
             </div>
         </div>
