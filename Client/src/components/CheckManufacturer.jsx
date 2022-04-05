@@ -51,7 +51,7 @@ const CheckManufacturer = () => {
     }, [manDetails])
 
     return (
-        <div className="border-2 border-gray-200 rounded-r-lg h-auto bg-white">
+        <div className="border-2 border-gray-200 rounded-lg h-96 bg-white" id="detectManufacturer">
             <div className="font-sans p-4 text-black w-full bg-white  justify-center">
                 <h3 className="text-xl mb-3 font-bold">
                     Check the Manufacturer

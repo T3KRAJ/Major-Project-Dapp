@@ -2,6 +2,7 @@ import React from 'react'
 import CheckManufacturer from './CheckManufacturer'
 import CheckProduct from './CheckProduct'
 import Eth from "../imgs/eth.svg"
+import OwnerHistory from './OwnerHistory'
 
 const Home = () => {
     return (
@@ -69,7 +70,7 @@ const Home = () => {
                       tracking-tighter
                     "> Detect Product </h2>
                                         <p class="text-base leading-relaxed text-gray-400">Check about the current owner and history of owners of the product.</p>
-                                        <a href="#" class="
+                                        <a href="#checkProduct" class="
                       md:mb-2
                       lg:mb-0
                       hover:text-neutral-600
@@ -113,7 +114,7 @@ const Home = () => {
                       tracking-tighter
                     "> Detect Manufacturer</h2>
                                         <p class="text-base leading-relaxed text-gray-400">Verify the address (manufacturer) is genuine or not.</p>
-                                        <a href="#" class="
+                                        <a href="#checkManufacturer" class="
                       md:mb-2
                       lg:mb-0
                       hover:text-neutral-600
@@ -175,10 +176,11 @@ const Home = () => {
             <main>
                 <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 h-96">
+                        <div class="grid grid-cols-1 ">
                             <CheckProduct />
                             <CheckManufacturer />
                         </div>
+                        {/* <OwnerHistory /> */}
                     </div>
                 </div>
             </main>

@@ -1,48 +1,44 @@
 import React, { useState } from 'react'
-import abi from "../utils/ProductDetection.json";
 import { ethers } from "ethers";
+import abi from "../utils/ProductDetection.json";
 import Loader from './Loader';
 
-const AddManufacturer = () => {
+const TransferOwnership = () => {
     const contractAddress = "0xB06f44329c3B2f92B1C9C78440Ca76063d575208";
     const contractABI = abi.abi
     const [isLoading, setIsLoading] = useState(false)
-
-    const [manufacturer, setManufacturer] = useState({
-        man_name: '',
-        website: '',
-        wallet_address: ''
+    const [ownership, setOwnership] = useState({
+        productID: '',
+        newAddress: ''
     })
 
     const handleInputChange = e => {
         const { name, value } = e.target;
-        setManufacturer(prevState => ({
+        setOwnership(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
 
-    const createManufacturer = async () => {
+    const transferOwnership = async () => {
         try {
             const { ethereum } = window;
             if (ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
                 const FPDetectionContract = new ethers.Contract(contractAddress, contractABI, signer);
-                const man_record = await FPDetectionContract.createManufacturer(
-                    manufacturer.man_name,
-                    manufacturer.website,
-                    manufacturer.wallet_address,
+                const owner_record = await FPDetectionContract.updateOwnership(
+                    ownership.productID,
+                    ownership.newAddress,
                     { gasLimit: 3000000 })
-                const receipt = await man_record.wait()
+                const receipt = await owner_record.wait()
                 const data = receipt.logs[0].data
-                const [man_name, man_address] = ethers.utils.defaultAbiCoder.decode(
-                    ['string', 'address'], data
+                const [product_id, man_address] = ethers.utils.defaultAbiCoder.decode(
+                    ['uint', 'address'], data
                 )
-                console.log(man_name)
-                console.log(man_address)
+                console.log("product ownership transferred to", man_address)
                 setIsLoading(false)
-                setManufacturer({ man_name: '', website: '', wallet_address: '' })
+                setOwnership({ productID: '', newAddress: '' })
             } else {
                 setIsLoading(false)
                 console.log("Ethereum object doesn't exist!");
@@ -56,49 +52,38 @@ const AddManufacturer = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setIsLoading(true)
-        createManufacturer()
+        transferOwnership()
     }
+
 
     return (
         <div className="border-2 border-gray-200 rounded-lg h-auto bg-white">
             <div class="font-sans p-4 text-black w-full  justify-center">
-                <h3 className="text-xl p-2 mb-3 text-gray-800 font-bold">
-                    Register New Manufacturer
+                <h3 className="text-xl mb-3 text-black font-bold">
+                    Transfer my Ownership
                 </h3>
-                <div class="w-full px-4 py-2 mx-auto">
-                    <form method="POST" onSubmit={handleSubmit}>
+                <div class="w-full px-4 py-4 mx-auto">
+                    <form onSubmit={handleSubmit}>
                         <label class="block mb-6">
-                            <span class="text-gray-800">Manufacturer Name</span>
+                            <span class="text-gray-800">Product Id</span>
                             <input
-                                type="text"
-                                name="man_name"
-                                value={manufacturer.man_name}
+                                type="number"
+                                name="productID"
+                                value={ownership.productID}
                                 onChange={handleInputChange}
-                                class="block w-full mt-2 p-2 rounded-md shadow-sm"
-                                placeholder="Manufacture Name"
+                                class="block w-full mt-2 p-2 rounded-md shadow-sm bg-white text-gray-800 border border-gray-400 focus:bg-gray-200 focus:border-gray-200"
+                                placeholder="Product ID"
                                 required
                             />
                         </label>
                         <label class="block mb-6">
-                            <span class="text-gray-800">Website</span>
+                            <span class="text-gray-800">New Owner's Address</span>
                             <input
-                                name="website"
-                                value={manufacturer.website}
+                                name="newAddress"
                                 type="text"
+                                value={ownership.newAddress}
                                 onChange={handleInputChange}
-                                class="block w-full mt-2 p-2 rounded-md shadow-sm"
-                                placeholder="https://company.com"
-                                required
-                            />
-                        </label>
-                        <label class="block mb-6">
-                            <span class="text-gray-800">Address</span>
-                            <input
-                                name="wallet_address"
-                                onChange={handleInputChange}
-                                value={manufacturer.wallet_address}
-                                type="text"
-                                class="block w-full mt-2 p-2 rounded-md shadow-sm"
+                                class="block w-full mt-2 p-2 rounded-md shadow-sm bg-white text-gray-800 border border-gray-400 focus:bg-gray-200 focus:border-gray-200"
                                 placeholder="0x0000000000000000000000000000000000000000"
                                 required
                             />
@@ -108,12 +93,11 @@ const AddManufacturer = () => {
                                 type="submit"
                                 class="h-10 px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-indigo-800"
                             >
-                                Register
+                                Transfer
                             </button>
                         </div>
                         <div>
                         </div>
-                        {isLoading && <div className='mx-auto py-6 flex justify-center'><Loader /></div>}
                     </form>
                 </div>
             </div>
@@ -121,4 +105,4 @@ const AddManufacturer = () => {
     )
 }
 
-export default AddManufacturer
+export default TransferOwnership
