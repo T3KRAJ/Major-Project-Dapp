@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import CheckManufacturer from './CheckManufacturer'
 import CheckProduct from './CheckProduct'
 import Eth from "../imgs/eth.svg"
 import OwnerHistory from './OwnerHistory'
 
 const Home = () => {
+    const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+    const myRef = useRef(null)
+   const executeScroll = () => scrollToRef(myRef)
     return (
         <>
             <section>
@@ -70,7 +73,7 @@ const Home = () => {
                       tracking-tighter
                     "> Detect Product </h2>
                                         <p class="text-base leading-relaxed text-gray-400">Check about the current owner and history of owners of the product.</p>
-                                        <a href="#checkProduct" class="
+                                        <a href="#checkProduct" onClick={executeScroll} class="
                       md:mb-2
                       lg:mb-0
                       hover:text-neutral-600
@@ -114,7 +117,7 @@ const Home = () => {
                       tracking-tighter
                     "> Detect Manufacturer</h2>
                                         <p class="text-base leading-relaxed text-gray-400">Verify the address (manufacturer) is genuine or not.</p>
-                                        <a href="#checkManufacturer" class="
+                                        <a href="#checkManufacturer" onClick={executeScroll} class="
                       md:mb-2
                       lg:mb-0
                       hover:text-neutral-600
@@ -175,8 +178,8 @@ const Home = () => {
             </section>
             <main>
                 <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                    <div className="px-4 py-6 sm:px-0">
-                        <div class="grid grid-cols-1 ">
+                    <div className="px-4 py-6 sm:px-0" ref={myRef}>
+                        <div  class="grid grid-cols-1">
                             <CheckProduct />
                             <CheckManufacturer />
                         </div>

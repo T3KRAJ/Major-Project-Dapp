@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./hoc/Layout";
 import Home from "./components/Home";
 import Manufacturer from "./components/Manufacturer";
+import CheckProduct from "./components/CheckProduct";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/manufacturer" element={<Manufacturer />} />
+          <Route path="/checkproduct" element={<CheckProduct />} />
         </Route>
       </Routes>
     </Router>

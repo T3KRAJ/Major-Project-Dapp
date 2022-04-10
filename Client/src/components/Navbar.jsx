@@ -4,7 +4,11 @@ import ConnectWallet from "./ConnectWallet";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const [isMenuHide, setIsMenuHide] = useState(true);
+    const chnageButton  = () =>{
+        setIsMenuOpen(true)
+        setIsMenuHide(true)
+    }
     return (
         <div class="bg-gray-900">
             <div class="px-4 py-3 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -34,6 +38,7 @@ const Navbar = () => {
                         </span>
                     </Link>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
+                    
                         <li>
                             <Link to="/manufacturer"
                                 aria-label="Our product"
@@ -52,6 +57,7 @@ const Navbar = () => {
                                 Admin
                             </Link>
                         </li>
+
                     </ul>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
@@ -63,7 +69,7 @@ const Navbar = () => {
                             aria-label="Open Menu"
                             title="Open Menu"
                             class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
-                            onClick={() => setIsMenuOpen(true)}
+                            onClick={() => chnageButton()}
                         >
                             <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
                                 <path
@@ -81,8 +87,10 @@ const Navbar = () => {
                             </svg>
                         </button>
                         {isMenuOpen && (
-                            <div class="absolute top-0 left-0 w-full">
-                                <div class="p-5 bg-white border rounded shadow-sm">
+                        
+                       <div class={ isMenuHide?"absolute top-0 left-0 w-full":"absolute top-0 left-0 w-full hidden"}>  
+                            
+                                <div class="p-5 bg-white border rounded shadow-sm ">
                                     <div class="flex items-center justify-between mb-4">
                                         <div>
                                             <Link to="/"
@@ -128,7 +136,7 @@ const Navbar = () => {
                                     </div>
                                     <nav>
                                         <ul class="space-y-4">
-                                            <li>
+                                            <li  onClick={() => setIsMenuHide(false)}>
                                                 <Link to="/manufacturer"
                                                     aria-label="Our product"
                                                     title="Our product"
@@ -139,6 +147,7 @@ const Navbar = () => {
                                             </li>
                                             <li>
                                                 <Link to="/admin"
+                                                onClick={() => setIsMenuHide(false)}
                                                     aria-label="Our product"
                                                     title="Our product"
                                                     class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -154,6 +163,7 @@ const Navbar = () => {
                                     </nav>
                                 </div>
                             </div>
+                            
                         )}
                     </div>
                 </div>

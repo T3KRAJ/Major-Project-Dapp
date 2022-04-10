@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import abi from "../utils/ProductDetection.json";
 import { ethers } from "ethers";
 import Loader from './Loader';
+import {Loading} from './Loading';
 
 const CreateProduct = () => {
     const contractAddress = "0xB06f44329c3B2f92B1C9C78440Ca76063d575208";
@@ -59,6 +60,8 @@ const CreateProduct = () => {
     }
 
     return (
+        <>
+        {isLoading? <Loading/> :
         <div className="border-2 border-gray-200 rounded-lg h-auto bg-gray-800">
             <div class="font-sans p-4 text-black w-full  justify-center">
                 <h3 className="text-xl mb-3 text-white font-bold">
@@ -115,7 +118,8 @@ const CreateProduct = () => {
                     </form>
                 </div>
             </div>
-        </div>
+        </div>}
+        </>
     )
 }
 
