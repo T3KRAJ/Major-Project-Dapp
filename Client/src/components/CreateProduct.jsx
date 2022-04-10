@@ -61,7 +61,7 @@ const CreateProduct = () => {
 
     return (
         <>
-        {isLoading? <Loading/> :
+        {isLoading? <Loading/> :null}
         <div className="border-2 border-gray-200 rounded-lg h-auto bg-gray-800">
             <div class="font-sans p-4 text-black w-full  justify-center">
                 <h3 className="text-xl mb-3 text-white font-bold">
@@ -118,7 +118,7 @@ const CreateProduct = () => {
                     </form>
                 </div>
             </div>
-        </div>}
+        </div>
         </>
     )
 }
