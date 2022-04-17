@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { ethers } from "ethers";
-import abi from "../utils/ProductDetection.json";
+import { contractABI, contractAddress } from '../lib';
 import Loader from './Loader';
 
 const TransferOwnership = () => {
-    const contractAddress = "0xB06f44329c3B2f92B1C9C78440Ca76063d575208";
-    const contractABI = abi.abi
     const [isLoading, setIsLoading] = useState(false)
     const [ownership, setOwnership] = useState({
         productID: '',

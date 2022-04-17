@@ -15,6 +15,7 @@ async function main() {
 
   const manCreation = await productContract.createManufacturer(
     "Sonam",
+    "https://tekraj.com",
     randomPerson.address
   );
   await manCreation.wait();
@@ -22,6 +23,7 @@ async function main() {
   const productCreation = await productContract.createProduct(
     "Shoe",
     "Nike",
+    9000,
     randomPerson.address
   );
   await productCreation.wait();

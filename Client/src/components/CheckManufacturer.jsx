@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
-import abi from "../utils/ProductDetection.json";
+import { contractABI, contractAddress } from '../lib';
 import Loader from './Loader';
 
 const CheckManufacturer = () => {
@@ -8,8 +8,6 @@ const CheckManufacturer = () => {
     const [manDetails, setManDetails] = useState('')
     const [lenError, setLenError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const contractAddress = "0xB06f44329c3B2f92B1C9C78440Ca76063d575208";
-    const contractABI = abi.abi
 
     const getManufacturer = async () => {
         try {

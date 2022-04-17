@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { ethers } from "ethers";
-import abi from "../utils/ProductDetection.json";
+import { BigNumber, ethers } from "ethers";
 import Loader from './Loader';
 import OwnerHistory from './OwnerHistory';
+import { contractABI, contractAddress } from '../lib';
 
 const CheckProduct = () => {
-    const contractAddress = "0xB06f44329c3B2f92B1C9C78440Ca76063d575208";
-    const contractABI = abi.abi
     const [productDetail, setProductDetail] = useState('')
     const [productID, setProductID] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -20,15 +18,32 @@ const CheckProduct = () => {
                 const signer = provider.getSigner();
                 const FPDetectionContract = new ethers.Contract(contractAddress, contractABI, signer);
                 const productInfo = await FPDetectionContract.getProduct(productID)
-                setProductDetail(productInfo)
                 console.log(productInfo)
+                const productInfoCleaned =
+                {
+                    id: productInfo.id.toNumber(),
+                    name: productInfo.name,
+                    model: productInfo.model,
+                    manufacturer: productInfo.manufacturer,
+                    initialPrice: productInfo.price.toNumber(),
+                    exists: productInfo.exists,
+                    curOwner: productInfo.curOwner,
+                    manufacturedTimestamp: new Date(productInfo.manufacturedTimestamp.toNumber() * 1000),
+                    owners: productInfo.owners.map((owner) => {
+                        return {
+                            owner: owner.curOwner,
+                            timestamp: new Date(owner.curTimestamp.toNumber() * 1000)
+                        }
+                    })
+                }
+                setProductDetail(productInfoCleaned)
                 setIsLoading(false)
             } else {
                 console.log("Ethereum object doesn't exist!");
             }
         } catch (error) {
             setIsLoading(false)
-            alert("Metamask not connected!");
+            alert(error);
         }
     }
 
@@ -60,11 +75,14 @@ const CheckProduct = () => {
                     />
                 </form>
                 {productDetail && <div class="justify-center text-center">
-                    {productDetail.exists ? <> <ul class="bg-gray-600 grid h-56 mt-4 content-center w-full text-gray-200">
+                    {productDetail.exists ? <> <ul class="bg-gray-600 grid h-auto mt-4 content-center w-full text-gray-200">
+                        <li class="px-6 py-2  w-full"><b>Product ID:</b> {productDetail.id}</li>
                         <li class="px-6 py-2  w-full"><b>Product Name:</b> {productDetail.name}</li>
                         <li class="px-6 py-2  w-full"><b>Product Model:</b> {productDetail.model}</li>
+                        <li class="px-6 py-2  w-full"><b>Initial Price:</b> {productDetail.initialPrice}</li>
                         <li class="px-6 py-2  w-full"><b>Manufacturer:</b> {productDetail.manufacturer}</li>
                         <li class="px-6 py-2  w-full"><b>Current Owner:</b> {productDetail.curOwner}</li>
+                        <li class="px-6 py-2  w-full"><b>Manufactured Date:</b> {productDetail.manufacturedTimestamp.toString()}</li>
 
                     </ul>
                         {productDetail.owners && <OwnerHistory owners={productDetail.owners} />}

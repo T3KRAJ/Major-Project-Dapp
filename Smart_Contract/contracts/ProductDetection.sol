@@ -22,6 +22,11 @@ contract ProductDetection {
         address wallet_address;
     }
 
+    struct productData {
+        address curOwner;
+        uint256 curTimestamp;
+    }
+
     struct Product {
         bool exists;
         uint256 id;
@@ -29,8 +34,9 @@ contract ProductDetection {
         string model;
         uint256 price;
         address manufacturer;
+        uint256 manufacturedTimestamp;
         address curOwner;
-        address[] owners;
+        productData[] owners;
     }
 
     mapping(address => Manufacturer) public manufacturers;
@@ -77,11 +83,14 @@ contract ProductDetection {
         p.name = _name;
         p.model = _model;
         p.price = _price;
+        p.manufacturedTimestamp = block.timestamp;
         p.manufacturer = msg.sender;
         p.curOwner = msg.sender;
-        // push cur owner(manufacturer) to owners array
-        p.owners.push(msg.sender);
-
+        productData memory data = productData(
+            msg.sender,
+            p.manufacturedTimestamp
+        );
+        p.owners.push(data);
         productId++;
         emit ProductCreated(productId - 1, msg.sender);
     }
@@ -102,7 +111,8 @@ contract ProductDetection {
         Product storage p = products[_id];
         require(p.curOwner == msg.sender, "Not authorized");
         p.curOwner = _newOwner;
-        p.owners.push(_newOwner);
+        productData memory data = productData(_newOwner, block.timestamp);
+        p.owners.push(data);
 
         emit OwnershipUpdated(_id, _newOwner);
     }
