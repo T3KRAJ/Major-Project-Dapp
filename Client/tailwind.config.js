@@ -1,11 +1,20 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,jsx,ts,js}"],
   theme: {
-    extend: {
-      animation: {
-        bounce200: "bounce 1s infinite 200ms",
-        bounce400: "bounce 1s infinite 400ms",
-      },
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      black: colors.black,
+      white: colors.white,
+      green: colors.green,
+      purple: colors.purple,
+      blue: colors.blue,
+      gray: colors.gray,
+      emerald: colors.emerald,
+      indigo: colors.indigo,
+      yellow: "#fe7b55",
     },
   },
   plugins: [],

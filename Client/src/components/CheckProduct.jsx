@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BigNumber, ethers } from "ethers";
 import Loader from './Loader';
 import OwnerHistory from './OwnerHistory';
-import { contractABI, contractAddress } from '../lib';
+import { contractABI, contractAddress, options } from '../lib';
 
 const CheckProduct = () => {
     const [productDetail, setProductDetail] = useState('')
@@ -59,7 +59,7 @@ const CheckProduct = () => {
     }, [productDetail])
     return (
         <div className="rounded-lg mb-4 h-auto bg-gray-600" id="detectProduct">
-            <div class="font-sans p-4 text-white w-full  justify-center">
+            <div class="font-sans p-4 text-white w-full justify-center">
                 <h3 className="text-xl mb-3 font-bold">
                     Check the Product
                 </h3>
@@ -82,7 +82,7 @@ const CheckProduct = () => {
                         <li class="px-6 py-2  w-full"><b>Initial Price:</b> {productDetail.initialPrice}</li>
                         <li class="px-6 py-2  w-full"><b>Manufacturer:</b> {productDetail.manufacturer}</li>
                         <li class="px-6 py-2  w-full"><b>Current Owner:</b> {productDetail.curOwner}</li>
-                        <li class="px-6 py-2  w-full"><b>Manufactured Date:</b> {productDetail.manufacturedTimestamp.toString()}</li>
+                        <li class="px-6 py-2  w-full"><b>Manufactured Time Stamp:</b> {productDetail.manufacturedTimestamp.toLocaleString("en-US", options)}</li>
 
                     </ul>
                         {productDetail.owners && <OwnerHistory owners={productDetail.owners} />}
@@ -90,7 +90,7 @@ const CheckProduct = () => {
                         :
                         <ul class="bg-white mt-8 border border-gray-800 w-96 text-gray-900">
                             <li class="px-6 py-2  w-full bg-red-600 text-white">
-                                Product Nat Available
+                                Product Not Available
                             </li>
                         </ul>
                     }

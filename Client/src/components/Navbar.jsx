@@ -5,7 +5,7 @@ import ConnectWallet from "./ConnectWallet";
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMenuHide, setIsMenuHide] = useState(true);
-    const chnageButton  = () =>{
+    const chnageButton = () => {
         setIsMenuOpen(true)
         setIsMenuHide(true)
     }
@@ -19,7 +19,7 @@ const Navbar = () => {
                         class="inline-flex items-center"
                     >
                         <svg
-                            class="w-8 text-green-200"
+                            class="w-8 text-yellow"
                             viewBox="0 0 24 24"
                             strokeLinejoin="round"
                             strokeWidth="2"
@@ -38,7 +38,7 @@ const Navbar = () => {
                         </span>
                     </Link>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
-                    
+
                         <li>
                             <Link to="/manufacturer"
                                 aria-label="Our product"
@@ -87,9 +87,9 @@ const Navbar = () => {
                             </svg>
                         </button>
                         {isMenuOpen && (
-                        
-                       <div class={ isMenuHide?"absolute top-0 left-0 w-full":"absolute top-0 left-0 w-full hidden"}>  
-                            
+
+                            <div class={isMenuHide ? "absolute top-0 left-0 w-full" : "absolute top-0 left-0 w-full hidden"}>
+
                                 <div class="p-5 bg-white border rounded shadow-sm ">
                                     <div class="flex items-center justify-between mb-4">
                                         <div>
@@ -136,7 +136,7 @@ const Navbar = () => {
                                     </div>
                                     <nav>
                                         <ul class="space-y-4">
-                                            <li  onClick={() => setIsMenuHide(false)}>
+                                            <li onClick={() => setIsMenuHide(false)}>
                                                 <Link to="/manufacturer"
                                                     aria-label="Our product"
                                                     title="Our product"
@@ -147,7 +147,7 @@ const Navbar = () => {
                                             </li>
                                             <li>
                                                 <Link to="/admin"
-                                                onClick={() => setIsMenuHide(false)}
+                                                    onClick={() => setIsMenuHide(false)}
                                                     aria-label="Our product"
                                                     title="Our product"
                                                     class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -163,7 +163,7 @@ const Navbar = () => {
                                     </nav>
                                 </div>
                             </div>
-                            
+
                         )}
                     </div>
                 </div>

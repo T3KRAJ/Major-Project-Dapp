@@ -1,17 +1,16 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import CheckManufacturer from './CheckManufacturer'
 import CheckProduct from './CheckProduct'
 import Eth from "../imgs/eth.svg"
-import OwnerHistory from './OwnerHistory'
 
 const Home = () => {
     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
     var myRef = useRef(null)
-   const executeScroll = () => {
-                        scrollToRef(myRef)
-                        myRef = elementRef.current.scrollIntoView({behavior: 'smooth'})
-                      
-                    }
+    const executeScroll = () => {
+        scrollToRef(myRef)
+        myRef = elementRef.current.scrollIntoView({ behavior: 'smooth' })
+
+    }
     return (
         <>
             <section>
@@ -84,9 +83,10 @@ const Home = () => {
                       inline-flex
                       items-center
                       mt-6
+                      cursor-pointer
                       font-semibold
                       text-blue-500
-                    " title="scroll"><svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    " title="scroll down"><svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path fill="none" d="M0 0h24v24H0z"></path>
                                                 <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
                                             </svg>
@@ -130,7 +130,7 @@ const Home = () => {
                       mt-6
                       font-semibold
                       text-blue-500
-                    " title="read more"><svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    " title="scroll down"><svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path fill="none" d="M0 0h24v24H0z"></path>
                                                 <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
                                             </svg>
@@ -183,11 +183,10 @@ const Home = () => {
             <main>
                 <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0" ref={myRef} id="box">
-                        <div  class="grid grid-cols-1">
+                        <div class="grid grid-cols-1">
                             <CheckProduct />
                             <CheckManufacturer />
                         </div>
-                        {/* <OwnerHistory /> */}
                     </div>
                 </div>
             </main>
