@@ -12,7 +12,7 @@ const OwnerHistory = ({ owners }) => {
         {owners && owners.map((owner, index) => {
           const timeline = index % 2 === 0 ? " right-timeline " : " left-timeline flex-row-reverse"
           return (
-            <div className={`mb-8 flex justify-between items-center w-full ${timeline} `}>
+            <div className={`mb-8 flex justify-between items-center w-full ${timeline} `} key={index}>
               <div className="order-1 w-5/12 text-white-200"></div>
               <div className="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-8 h-8 rounded-full">
                 <h1 className="mx-auto font-semibold text-lg text-yellow">{index + 1}</h1>

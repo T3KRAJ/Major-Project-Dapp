@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import truncateEthAddress from 'truncate-eth-address'
 
 const ConnectWallet = () => {
@@ -50,7 +49,7 @@ const ConnectWallet = () => {
         <>
 
             {currentAccount ? <h2 className="inline-flex items-center justify-center w-full h-12 px-6 font-medium text-purple-700">{truncateEthAddress(currentAccount)}</h2> : <button to="/manufacturer"
-                class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
+                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none"
                 aria-label="Connect Wallet"
                 title="Connect Wallet"
                 type="button"

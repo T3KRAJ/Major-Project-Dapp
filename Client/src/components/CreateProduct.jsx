@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { contractABI, contractAddress } from '../lib';
 import { ethers } from "ethers";
-import Loader from './Loader';
-import { Loading } from './Loading';
+import { Loading } from './Loader';
 
 const CreateProduct = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -59,7 +58,7 @@ const CreateProduct = () => {
 
     return (
         <>
-            {isLoading ? <Loading /> : null}
+            {isLoading && <Loading />}
             <div className="border-2 border-gray-200 rounded-lg h-auto bg-gray-800">
                 <div class="font-sans p-4 text-black w-full  justify-center">
                     <h3 className="text-xl mb-3 text-white font-bold">

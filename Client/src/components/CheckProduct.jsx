@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { BigNumber, ethers } from "ethers";
-import Loader from './Loader';
+import { ethers } from "ethers";
+import { Loader } from './Loader';
 import OwnerHistory from './OwnerHistory';
 import { contractABI, contractAddress, options } from '../lib';
 
@@ -14,6 +14,7 @@ const CheckProduct = () => {
             const { ethereum } = window;
             if (ethereum) {
                 setProductDetail('')
+                setIsLoading(true)
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
                 const FPDetectionContract = new ethers.Contract(contractAddress, contractABI, signer);
@@ -74,7 +75,9 @@ const CheckProduct = () => {
                         placeholder="Enter the product ID"
                     />
                 </form>
-                {productDetail && <div class="justify-center text-center">
+                {isLoading && <div className='mx-auto py-6 flex justify-center'><Loader /></div>}
+
+                {productDetail && <div class="flex justify-center text-center">
                     {productDetail.exists ? <> <ul class="bg-gray-600 grid h-auto mt-4 content-center w-full text-gray-200">
                         <li class="px-6 py-2  w-full"><b>Product ID:</b> {productDetail.id}</li>
                         <li class="px-6 py-2  w-full"><b>Product Name:</b> {productDetail.name}</li>

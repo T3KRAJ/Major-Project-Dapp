@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ethers } from "ethers";
 import { contractABI, contractAddress } from '../lib';
-import Loader from './Loader';
+import { Loader } from './Loader';
 
 const CheckManufacturer = () => {
     const [manAddress, setManAddress] = useState('')
@@ -29,7 +29,7 @@ const CheckManufacturer = () => {
             }
         } catch (error) {
             setIsLoading(false)
-            alert("Metamask not connected!");
+            alert(error);
         }
     }
 
@@ -79,7 +79,7 @@ const CheckManufacturer = () => {
                     </ul>
                         :
                         <ul class="bg-white mt-8 border border-gray-200 w-96 text-gray-900">
-                            <li class="px-6 py-2 border-b border-gray-200 w-full bg-red-600 text-white">
+                            <li class="text-center px-6 py-2 border-b border-gray-200 w-full bg-red-600 text-white">
                                 Manufacturer Nat Available
                             </li>
                         </ul>
