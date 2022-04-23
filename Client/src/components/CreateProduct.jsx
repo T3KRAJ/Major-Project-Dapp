@@ -5,6 +5,8 @@ import { Loading } from './Loader';
 
 const CreateProduct = () => {
     const [isLoading, setIsLoading] = useState(false)
+    const [productCreated, setProductCreated] = useState('')
+
     const [product, setProduct] = useState({
         product_name: '',
         model: '',
@@ -24,6 +26,7 @@ const CreateProduct = () => {
         try {
             const { ethereum } = window;
             if (ethereum) {
+                setProductCreated('')
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
                 const FPDetectionContract = new ethers.Contract(contractAddress, contractABI, signer);
@@ -37,6 +40,7 @@ const CreateProduct = () => {
                 const [product_id, man_address] = ethers.utils.defaultAbiCoder.decode(
                     ['uint', 'address'], data
                 )
+                setProductCreated(product_id.toNumber())
                 console.log("product ", product_id, "created by", man_address)
                 setIsLoading(false)
                 setProduct({ product_name: '', model: '', price: '' })
@@ -109,7 +113,9 @@ const CreateProduct = () => {
                                 >
                                     Create Product
                                 </button>
+
                             </div>
+                            {productCreated && <p className='text-normal my-2 text-green-500 font-bold'>Product with ID {productCreated} created Successfully!</p>}
                             <div>
                             </div>
                         </form>

@@ -2,18 +2,8 @@
 pragma solidity ^0.8.0;
 
 contract ProductDetection {
-    /*
-		holds the address of the owner of the contract
-		owner -> the address which deploys this smart contract on the network.
-	*/
     address public owner;
-    /*
-		productId is used to provide a unique ID to every product that is added.
-		It increments every time a new product is created.
-	*/
-    uint256 productId = 0;
-
-    // define all custom structs
+    uint256 public productId = 0;
 
     struct Manufacturer {
         bool exists;
@@ -40,7 +30,7 @@ contract ProductDetection {
     }
 
     mapping(address => Manufacturer) public manufacturers;
-    mapping(uint256 => Product) products;
+    mapping(uint256 => Product) public products;
 
     event ManufacturerCreated(string name, address _address);
     event ProductCreated(uint256 id, address manufacturer);

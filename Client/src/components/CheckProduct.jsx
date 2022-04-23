@@ -77,7 +77,7 @@ const CheckProduct = () => {
                 </form>
                 {isLoading && <div className='mx-auto py-6 flex justify-center'><Loader /></div>}
 
-                {productDetail && <div class="flex justify-center text-center">
+                {productDetail && <div class="justify-center text-center">
                     {productDetail.exists ? <> <ul class="bg-gray-600 grid h-auto mt-4 content-center w-full text-gray-200">
                         <li class="px-6 py-2  w-full"><b>Product ID:</b> {productDetail.id}</li>
                         <li class="px-6 py-2  w-full"><b>Product Name:</b> {productDetail.name}</li>
@@ -91,7 +91,7 @@ const CheckProduct = () => {
                         {productDetail.owners && <OwnerHistory owners={productDetail.owners} />}
                     </>
                         :
-                        <ul class="bg-white mt-8 border border-gray-800 w-96 text-gray-900">
+                        <ul class="flex justify-center text-center bg-white mt-8 border border-gray-800 w-96 text-gray-900">
                             <li class="px-6 py-2  w-full bg-red-600 text-white">
                                 Product Not Available
                             </li>
